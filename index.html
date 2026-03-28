@@ -46,12 +46,15 @@
     .nav-logo img {
       height: 44px;
       display: block;
-      /* show white version on transparent nav */
       filter: brightness(0) invert(1);
       transition: filter .3s;
     }
-    nav.scrolled .nav-logo img {
-      filter: none;
+    nav.scrolled .nav-logo img { filter: none; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
     }
     .nav-links {
       display: flex;
@@ -69,6 +72,34 @@
     }
     nav.scrolled .nav-links a { color: var(--navy); }
     .nav-links a:hover { color: var(--blue); }
+
+    /* language toggle */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      background: none;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 3px;
+      padding: .25rem .6rem;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: .78rem;
+      letter-spacing: .06em;
+      color: #fff;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    nav.scrolled .lang-toggle {
+      border-color: var(--border);
+      color: var(--navy);
+    }
+    .lang-toggle:hover {
+      background: rgba(255,255,255,.15);
+    }
+    nav.scrolled .lang-toggle:hover {
+      background: var(--bg-alt);
+    }
 
     /* hamburger */
     .nav-toggle {
@@ -104,6 +135,7 @@
       }
       .nav-links.open { display: flex; }
       .nav-links a { color: var(--navy); }
+      .lang-toggle { border-color: var(--border); color: var(--navy); }
     }
 
     /* ── HERO ── */
@@ -232,9 +264,7 @@
 
     /* ── PRODUCTOS ── */
     #productos { background: var(--bg); }
-    .productos-intro {
-      max-width: 620px;
-    }
+    .productos-intro { max-width: 620px; }
     .productos-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -259,9 +289,7 @@
       object-fit: cover;
       display: block;
     }
-    .card-body {
-      padding: 1.1rem 1.2rem;
-    }
+    .card-body { padding: 1.1rem 1.2rem; }
     .card-body h3 {
       font-family: 'Montserrat', sans-serif;
       font-size: 1rem;
@@ -269,18 +297,18 @@
       color: var(--navy);
       margin-bottom: .25rem;
     }
-    .card-body p {
-      font-size: .85rem;
-      color: var(--muted);
-    }
     .card-body .scientific {
       font-size: .78rem;
       font-style: italic;
       color: #aab8c8;
       margin-bottom: .3rem;
     }
+    .card-body p {
+      font-size: .85rem;
+      color: var(--muted);
+    }
 
-    /* ── POR QUÉ ELEGIRNOS ── */
+    /* ── VENTAJAS ── */
     #ventajas { background: var(--navy); color: #fff; }
     #ventajas .section-title { color: #fff; }
     #ventajas .section-subtitle { color: rgba(255,255,255,.65); }
@@ -292,13 +320,9 @@
       max-width: 1100px;
       margin: 0 auto;
     }
-    .ventaja {
-      text-align: center;
-      padding: 1.5rem 1rem;
-    }
+    .ventaja { text-align: center; padding: 1.5rem 1rem; }
     .ventaja-icon {
-      width: 56px;
-      height: 56px;
+      width: 56px; height: 56px;
       background: rgba(58,155,213,.2);
       border-radius: 50%;
       display: flex;
@@ -312,10 +336,7 @@
       font-weight: 700;
       margin-bottom: .4rem;
     }
-    .ventaja p {
-      font-size: .85rem;
-      color: rgba(255,255,255,.65);
-    }
+    .ventaja p { font-size: .85rem; color: rgba(255,255,255,.65); }
 
     /* ── CONTACTO ── */
     #contacto { background: var(--bg-alt); }
@@ -343,10 +364,7 @@
       color: var(--muted);
     }
     .contacto-dato svg { flex-shrink: 0; margin-top: 2px; }
-    .contacto-dato a {
-      color: var(--blue);
-      text-decoration: none;
-    }
+    .contacto-dato a { color: var(--blue); text-decoration: none; }
     .contacto-dato a:hover { text-decoration: underline; }
 
     form { display: flex; flex-direction: column; gap: 1rem; }
@@ -416,24 +434,27 @@
     <a href="#inicio" class="nav-logo">
       <img src="logo.jpeg" alt="Balmar S.A." />
     </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#nosotros">Nosotros</a></li>
-      <li><a href="#productos">Productos</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-    </ul>
+    <div class="nav-right">
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio" data-i18n="nav.inicio">Inicio</a></li>
+        <li><a href="#nosotros" data-i18n="nav.nosotros">Nosotros</a></li>
+        <li><a href="#productos" data-i18n="nav.productos">Productos</a></li>
+        <li><a href="#contacto" data-i18n="nav.contacto">Contacto</a></li>
+      </ul>
+      <button class="lang-toggle" id="langToggle">EN</button>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero" id="inicio">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1>Conectamos el mar<br>con el mundo</h1>
-      <p>Importación, exportación y comercialización de pescados y mariscos de primera calidad.</p>
-      <a href="#contacto" class="btn btn-primary">Contáctenos</a>
+      <h1 data-i18n="hero.h1">Conectamos el mar<br>con el mundo</h1>
+      <p data-i18n="hero.p">Importación, exportación y comercialización de pescados y mariscos de primera calidad.</p>
+      <a href="#contacto" class="btn btn-primary" data-i18n="hero.cta">Contáctenos</a>
     </div>
   </section>
 
@@ -441,27 +462,27 @@
   <section id="nosotros">
     <div class="nosotros-grid">
       <div class="nosotros-text">
-        <h2 class="section-title">Quiénes somos</h2>
+        <h2 class="section-title" data-i18n="nosotros.title">Quiénes somos</h2>
         <div class="section-divider"></div>
-        <p class="section-subtitle">Empresa argentina especializada en el comercio de productos del mar.</p>
-        <p>En Balmar S.A. comercializamos productos del mar argentino de primera calidad, operando con los más altos estándares de trazabilidad y sanidad exigidos por los mercados internacionales.</p>
-        <p>Exportamos a Latinoamérica, Norteamérica, Europa, Asia y África, conectando las riquezas del mar argentino con compradores en todo el mundo mediante una cadena logística confiable y eficiente.</p>
+        <p class="section-subtitle" data-i18n="nosotros.subtitle">Empresa argentina especializada en el comercio de productos del mar.</p>
+        <p data-i18n="nosotros.p1">En Balmar S.A. comercializamos productos del mar argentino de primera calidad, operando con los más altos estándares de trazabilidad y sanidad exigidos por los mercados internacionales.</p>
+        <p data-i18n="nosotros.p2">Exportamos a Latinoamérica, Norteamérica, Europa, Asia y África, conectando las riquezas del mar argentino con compradores en todo el mundo mediante una cadena logística confiable y eficiente.</p>
         <div class="valores">
           <div class="valor">
             <svg width="16" height="16" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            Calidad certificada
+            <span data-i18n="nosotros.v1">Calidad certificada</span>
           </div>
           <div class="valor">
             <svg width="16" height="16" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            Trazabilidad total
+            <span data-i18n="nosotros.v2">Trazabilidad total</span>
           </div>
           <div class="valor">
             <svg width="16" height="16" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            Comercio exterior
+            <span data-i18n="nosotros.v3">Comercio exterior</span>
           </div>
           <div class="valor">
             <svg width="16" height="16" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            Atención personalizada
+            <span data-i18n="nosotros.v4">Atención personalizada</span>
           </div>
         </div>
       </div>
@@ -474,80 +495,80 @@
   <!-- PRODUCTOS -->
   <section id="productos">
     <div class="productos-intro">
-      <h2 class="section-title">Nuestros productos</h2>
+      <h2 class="section-title" data-i18n="productos.title">Nuestros productos</h2>
       <div class="section-divider"></div>
-      <p class="section-subtitle">Especies del mar argentino, capturadas y procesadas con los más altos estándares para mercados de todo el mundo.</p>
+      <p class="section-subtitle" data-i18n="productos.subtitle">Especies del mar argentino, capturadas y procesadas con los más altos estándares para mercados de todo el mundo.</p>
     </div>
     <div class="productos-grid">
       <div class="card">
         <img src="corvina.jpeg" alt="Corvina Rubia" />
         <div class="card-body">
           <p class="scientific">Micropogonias furnieri</p>
-          <h3>Corvina Rubia</h3>
-          <p>Especie de alto valor gastronómico, muy apreciada en los mercados europeos y asiáticos.</p>
+          <h3 data-i18n="productos.corvina.name">Corvina Rubia</h3>
+          <p data-i18n="productos.corvina.desc">Especie de alto valor gastronómico, muy apreciada en los mercados europeos y asiáticos.</p>
         </div>
       </div>
       <div class="card">
         <img src="merluza.jpeg" alt="Merluza" />
         <div class="card-body">
           <p class="scientific">Merluccius hubbsi</p>
-          <h3>Merluza (Hake)</h3>
-          <p>Uno de los recursos pesqueros más importantes de Argentina, con alta demanda internacional.</p>
+          <h3 data-i18n="productos.merluza.name">Merluza / Hake</h3>
+          <p data-i18n="productos.merluza.desc">Uno de los recursos pesqueros más importantes de Argentina, con alta demanda internacional.</p>
         </div>
       </div>
       <div class="card">
         <img src="langostino.jpeg" alt="Langostino" />
         <div class="card-body">
           <p class="scientific">Pleoticus muelleri</p>
-          <h3>Langostino</h3>
-          <p>El crustáceo de exportación más valorado de Argentina, reconocido por su sabor y textura.</p>
+          <h3 data-i18n="productos.langostino.name">Langostino</h3>
+          <p data-i18n="productos.langostino.desc">El crustáceo de exportación más valorado de Argentina, reconocido por su sabor y textura.</p>
         </div>
       </div>
       <div class="card">
         <img src="calamar.jpeg" alt="Calamar" />
         <div class="card-body">
           <p class="scientific">Illex argentinus</p>
-          <h3>Calamar</h3>
-          <p>Captura de temporada con gran demanda en Asia, Europa y América del Norte.</p>
+          <h3 data-i18n="productos.calamar.name">Calamar</h3>
+          <p data-i18n="productos.calamar.desc">Captura de temporada con gran demanda en Asia, Europa y América del Norte.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- POR QUÉ ELEGIRNOS -->
+  <!-- VENTAJAS -->
   <section id="ventajas">
     <div style="max-width:1100px; margin:0 auto;">
-      <h2 class="section-title">¿Por qué elegirnos?</h2>
+      <h2 class="section-title" data-i18n="ventajas.title">¿Por qué elegirnos?</h2>
       <div class="section-divider"></div>
-      <p class="section-subtitle">Nos diferenciamos por el compromiso con la calidad y la solidez operativa.</p>
+      <p class="section-subtitle" data-i18n="ventajas.subtitle">Nos diferenciamos por el compromiso con la calidad y la solidez operativa.</p>
       <div class="ventajas-grid">
         <div class="ventaja">
           <div class="ventaja-icon">
             <svg width="26" height="26" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <h4>Calidad garantizada</h4>
-          <p>Todos nuestros productos cumplen las normativas sanitarias nacionales e internacionales.</p>
+          <h4 data-i18n="ventajas.v1.title">Calidad garantizada</h4>
+          <p data-i18n="ventajas.v1.desc">Todos nuestros productos cumplen las normativas sanitarias nacionales e internacionales.</p>
         </div>
         <div class="ventaja">
           <div class="ventaja-icon">
             <svg width="26" height="26" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
-          <h4>Cumplimiento en tiempo</h4>
-          <p>Cadena logística optimizada para garantizar entregas en los plazos acordados.</p>
+          <h4 data-i18n="ventajas.v2.title">Cumplimiento en tiempo</h4>
+          <p data-i18n="ventajas.v2.desc">Cadena logística optimizada para garantizar entregas en los plazos acordados.</p>
         </div>
         <div class="ventaja">
           <div class="ventaja-icon">
             <svg width="26" height="26" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 12 2"/><path d="M2 12h4M18 12h4"/></svg>
           </div>
-          <h4>Alcance internacional</h4>
-          <p>Experiencia en operaciones de comercio exterior con destinos en múltiples mercados.</p>
+          <h4 data-i18n="ventajas.v3.title">Alcance internacional</h4>
+          <p data-i18n="ventajas.v3.desc">Experiencia en operaciones de comercio exterior con destinos en múltiples mercados.</p>
         </div>
         <div class="ventaja">
           <div class="ventaja-icon">
             <svg width="26" height="26" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h4>Trato personalizado</h4>
-          <p>Asesoramiento directo y soluciones adaptadas a las necesidades de cada cliente.</p>
+          <h4 data-i18n="ventajas.v4.title">Trato personalizado</h4>
+          <p data-i18n="ventajas.v4.desc">Asesoramiento directo y soluciones adaptadas a las necesidades de cada cliente.</p>
         </div>
       </div>
     </div>
@@ -556,15 +577,15 @@
   <!-- CONTACTO -->
   <section id="contacto">
     <div style="max-width:1000px; margin:0 auto;">
-      <h2 class="section-title">Contacto</h2>
+      <h2 class="section-title" data-i18n="contacto.title">Contacto</h2>
       <div class="section-divider"></div>
-      <p class="section-subtitle">¿Tiene una consulta o desea hacer un pedido? Escríbanos y le respondemos a la brevedad.</p>
+      <p class="section-subtitle" data-i18n="contacto.subtitle">¿Tiene una consulta o desea hacer un pedido? Escríbanos y le respondemos a la brevedad.</p>
       <div class="contacto-grid">
         <div class="contacto-info">
           <h3>Balmar S.A.</h3>
           <div class="contacto-dato">
             <svg width="18" height="18" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            <span><strong>Baltasar Moisano</strong><br>Gerente Comercial</span>
+            <span><strong>Baltasar Moisano</strong><br><span data-i18n="contacto.cargo">Gerente Comercial</span></span>
           </div>
           <div class="contacto-dato">
             <svg width="18" height="18" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -584,16 +605,15 @@
           </div>
         </div>
         <div>
-          <div class="form-success" id="formSuccess">
+          <div class="form-success" id="formSuccess" data-i18n="contacto.success">
             ¡Mensaje enviado! Le responderemos a la brevedad.
           </div>
-          <!-- Reemplazar XXXXXXXX con el ID de Formspree -->
           <form action="https://formspree.io/f/mdapeoeq" method="POST" id="contactForm">
-            <input type="text" name="nombre" placeholder="Nombre y apellido" required />
-            <input type="email" name="email" placeholder="Correo electrónico" required />
-            <input type="text" name="empresa" placeholder="Empresa (opcional)" />
-            <textarea name="mensaje" placeholder="Su consulta..." required></textarea>
-            <button type="submit">Enviar mensaje</button>
+            <input type="text" name="nombre" data-i18n-placeholder="contacto.form.nombre" placeholder="Nombre y apellido" required />
+            <input type="email" name="email" data-i18n-placeholder="contacto.form.email" placeholder="Correo electrónico" required />
+            <input type="text" name="empresa" data-i18n-placeholder="contacto.form.empresa" placeholder="Empresa (opcional)" />
+            <textarea name="mensaje" data-i18n-placeholder="contacto.form.mensaje" placeholder="Su consulta..." required></textarea>
+            <button type="submit" data-i18n="contacto.form.submit">Enviar mensaje</button>
           </form>
         </div>
       </div>
@@ -603,22 +623,151 @@
   <!-- FOOTER -->
   <footer>
     <img src="logo.jpeg" alt="Balmar S.A." />
-    <p>© 2026 Balmar S.A. — Todos los derechos reservados.</p>
+    <p>© 2026 Balmar S.A. — <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
     <p style="margin-top:.4rem;">
-      <a href="#nosotros">Nosotros</a> &nbsp;·&nbsp;
-      <a href="#productos">Productos</a> &nbsp;·&nbsp;
-      <a href="#contacto">Contacto</a>
+      <a href="#nosotros" data-i18n="nav.nosotros">Nosotros</a> &nbsp;·&nbsp;
+      <a href="#productos" data-i18n="nav.productos">Productos</a> &nbsp;·&nbsp;
+      <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
     </p>
   </footer>
 
   <script>
-    // Navbar scroll effect
+    const translations = {
+      es: {
+        'nav.inicio':    'Inicio',
+        'nav.nosotros':  'Nosotros',
+        'nav.productos': 'Productos',
+        'nav.contacto':  'Contacto',
+        'hero.h1':       'Conectamos el mar<br>con el mundo',
+        'hero.p':        'Importación, exportación y comercialización de pescados y mariscos de primera calidad.',
+        'hero.cta':      'Contáctenos',
+        'nosotros.title':    'Quiénes somos',
+        'nosotros.subtitle': 'Empresa argentina especializada en el comercio de productos del mar.',
+        'nosotros.p1':       'En Balmar S.A. comercializamos productos del mar argentino de primera calidad, operando con los más altos estándares de trazabilidad y sanidad exigidos por los mercados internacionales.',
+        'nosotros.p2':       'Exportamos a Latinoamérica, Norteamérica, Europa, Asia y África, conectando las riquezas del mar argentino con compradores en todo el mundo mediante una cadena logística confiable y eficiente.',
+        'nosotros.v1': 'Calidad certificada',
+        'nosotros.v2': 'Trazabilidad total',
+        'nosotros.v3': 'Comercio exterior',
+        'nosotros.v4': 'Atención personalizada',
+        'productos.title':    'Nuestros productos',
+        'productos.subtitle': 'Especies del mar argentino, capturadas y procesadas con los más altos estándares para mercados de todo el mundo.',
+        'productos.corvina.name':    'Corvina Rubia',
+        'productos.corvina.desc':    'Especie de alto valor gastronómico, muy apreciada en los mercados europeos y asiáticos.',
+        'productos.merluza.name':    'Merluza / Hake',
+        'productos.merluza.desc':    'Uno de los recursos pesqueros más importantes de Argentina, con alta demanda internacional.',
+        'productos.langostino.name': 'Langostino',
+        'productos.langostino.desc': 'El crustáceo de exportación más valorado de Argentina, reconocido por su sabor y textura.',
+        'productos.calamar.name':    'Calamar',
+        'productos.calamar.desc':    'Captura de temporada con gran demanda en Asia, Europa y América del Norte.',
+        'ventajas.title':    '¿Por qué elegirnos?',
+        'ventajas.subtitle': 'Nos diferenciamos por el compromiso con la calidad y la solidez operativa.',
+        'ventajas.v1.title': 'Calidad garantizada',
+        'ventajas.v1.desc':  'Todos nuestros productos cumplen las normativas sanitarias nacionales e internacionales.',
+        'ventajas.v2.title': 'Cumplimiento en tiempo',
+        'ventajas.v2.desc':  'Cadena logística optimizada para garantizar entregas en los plazos acordados.',
+        'ventajas.v3.title': 'Alcance internacional',
+        'ventajas.v3.desc':  'Experiencia en operaciones de comercio exterior con destinos en múltiples mercados.',
+        'ventajas.v4.title': 'Trato personalizado',
+        'ventajas.v4.desc':  'Asesoramiento directo y soluciones adaptadas a las necesidades de cada cliente.',
+        'contacto.title':    'Contacto',
+        'contacto.subtitle': '¿Tiene una consulta o desea hacer un pedido? Escríbanos y le respondemos a la brevedad.',
+        'contacto.cargo':    'Gerente Comercial',
+        'contacto.success':  '¡Mensaje enviado! Le responderemos a la brevedad.',
+        'contacto.form.nombre':  'Nombre y apellido',
+        'contacto.form.email':   'Correo electrónico',
+        'contacto.form.empresa': 'Empresa (opcional)',
+        'contacto.form.mensaje': 'Su consulta...',
+        'contacto.form.submit':  'Enviar mensaje',
+        'footer.rights': 'Todos los derechos reservados.',
+      },
+      en: {
+        'nav.inicio':    'Home',
+        'nav.nosotros':  'About',
+        'nav.productos': 'Products',
+        'nav.contacto':  'Contact',
+        'hero.h1':       'Connecting the Sea<br>with the World',
+        'hero.p':        'Import, export and commercialization of premium seafood and fish products.',
+        'hero.cta':      'Contact Us',
+        'nosotros.title':    'About Us',
+        'nosotros.subtitle': 'Argentine company specialized in seafood trade.',
+        'nosotros.p1':       'At Balmar S.A. we commercialize top-quality Argentine seafood products, operating under the highest standards of traceability and food safety required by international markets.',
+        'nosotros.p2':       'We export to Latin America, North America, Europe, Asia and Africa, connecting the wealth of the Argentine sea with buyers around the world through a reliable and efficient supply chain.',
+        'nosotros.v1': 'Certified quality',
+        'nosotros.v2': 'Full traceability',
+        'nosotros.v3': 'International trade',
+        'nosotros.v4': 'Personalized service',
+        'productos.title':    'Our Products',
+        'productos.subtitle': 'Species from the Argentine sea, caught and processed to the highest standards for markets worldwide.',
+        'productos.corvina.name':    'Corvina Rubia',
+        'productos.corvina.desc':    'A high-value species prized in European and Asian markets for its flavor and texture.',
+        'productos.merluza.name':    'Merluza / Hake',
+        'productos.merluza.desc':    'One of Argentina\'s most important fishery resources, in high demand worldwide.',
+        'productos.langostino.name': 'Patagonian Red Shrimp',
+        'productos.langostino.desc': 'Argentina\'s most valued export crustacean, renowned for its exceptional taste and texture.',
+        'productos.calamar.name':    'Squid',
+        'productos.calamar.desc':    'Seasonal catch with strong demand across Asia, Europe and North America.',
+        'ventajas.title':    'Why Choose Us?',
+        'ventajas.subtitle': 'We stand out for our commitment to quality and operational reliability.',
+        'ventajas.v1.title': 'Guaranteed quality',
+        'ventajas.v1.desc':  'All our products comply with national and international food safety regulations.',
+        'ventajas.v2.title': 'On-time delivery',
+        'ventajas.v2.desc':  'Optimized logistics chain ensuring deliveries within agreed timeframes.',
+        'ventajas.v3.title': 'Global reach',
+        'ventajas.v3.desc':  'Experienced in international trade operations with destinations across multiple markets.',
+        'ventajas.v4.title': 'Personalized service',
+        'ventajas.v4.desc':  'Direct advice and tailored solutions for each client\'s specific needs.',
+        'contacto.title':    'Contact',
+        'contacto.subtitle': 'Have a question or want to place an order? Write to us and we\'ll get back to you promptly.',
+        'contacto.cargo':    'Commercial Manager',
+        'contacto.success':  'Message sent! We will get back to you shortly.',
+        'contacto.form.nombre':  'Full name',
+        'contacto.form.email':   'Email address',
+        'contacto.form.empresa': 'Company (optional)',
+        'contacto.form.mensaje': 'Your inquiry...',
+        'contacto.form.submit':  'Send message',
+        'footer.rights': 'All rights reserved.',
+      }
+    };
+
+    let currentLang = 'es';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      const t = translations[lang];
+
+      // text content
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+
+      // placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (t[key] !== undefined) el.placeholder = t[key];
+      });
+
+      // toggle button label
+      document.getElementById('langToggle').textContent = lang === 'es' ? 'EN' : 'ES';
+    }
+
+    // auto-detect on load
+    const browserLang = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
+    setLang(browserLang.startsWith('es') ? 'es' : 'en');
+
+    // manual toggle
+    document.getElementById('langToggle').addEventListener('click', () => {
+      setLang(currentLang === 'es' ? 'en' : 'es');
+    });
+
+    // navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    // Mobile menu toggle
+    // mobile menu
     const toggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
     toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
@@ -626,14 +775,13 @@
       a.addEventListener('click', () => navLinks.classList.remove('open'))
     );
 
-    // Formspree AJAX submit
+    // formspree AJAX
     const form = document.getElementById('contactForm');
     const success = document.getElementById('formSuccess');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const data = new FormData(form);
       const res = await fetch(form.action, {
-        method: 'POST', body: data,
+        method: 'POST', body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       });
       if (res.ok) {
