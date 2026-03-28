@@ -225,9 +225,9 @@
     #nosotros { background: var(--bg-alt); }
     .nosotros-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      align-items: start;
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -236,24 +236,10 @@
       margin-bottom: 1rem;
       font-size: .97rem;
     }
-    .nosotros-img {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
     .nosotros-logo {
-      width: 82%;
-      display: block;
-      margin: 0 auto;
-      mix-blend-mode: multiply;
-    }
-    .nosotros-photo {
       width: 100%;
-      border-radius: 4px;
-      object-fit: cover;
-      height: 220px;
-      box-shadow: 0 8px 32px rgba(27,63,122,.12);
       display: block;
+      mix-blend-mode: multiply;
     }
     .valores {
       display: flex;
@@ -478,6 +464,9 @@
   <!-- NOSOTROS -->
   <section id="nosotros">
     <div class="nosotros-grid">
+      <div class="nosotros-img">
+        <img src="logo.jpeg" alt="Balmar S.A." class="nosotros-logo" />
+      </div>
       <div class="nosotros-text">
         <h2 class="section-title" data-i18n="nosotros.title">Quiénes somos</h2>
         <div class="section-divider"></div>
@@ -502,10 +491,6 @@
             <span data-i18n="nosotros.v4">Atención personalizada</span>
           </div>
         </div>
-      </div>
-      <div class="nosotros-img">
-        <img src="logo.jpeg" alt="Balmar S.A." class="nosotros-logo" />
-        <img src="balmar.jpeg" alt="Puerto pesquero de Mar del Plata" class="nosotros-photo" />
       </div>
     </div>
   </section>
