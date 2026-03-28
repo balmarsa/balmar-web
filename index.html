@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Balmar S.A. — Importación y Exportación de Pescados y Mariscos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1B3F7A;
+      --blue:   #3A9BD5;
+      --text:   #222222;
+      --muted:  #666666;
+      --bg:     #ffffff;
+      --bg-alt: #F4F8FB;
+      --border: #DDE6EE;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      height: 72px;
+      transition: background .3s, box-shadow .3s;
+    }
+    nav.scrolled {
+      background: var(--bg);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    }
+    .nav-logo img {
+      height: 44px;
+      display: block;
+      /* show white version on transparent nav */
+      filter: brightness(0) invert(1);
+      transition: filter .3s;
+    }
+    nav.scrolled .nav-logo img {
+      filter: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: .88rem;
+      letter-spacing: .04em;
+      color: #fff;
+      transition: color .2s;
+    }
+    nav.scrolled .nav-links a { color: var(--navy); }
+    .nav-links a:hover { color: var(--blue); }
+
+    /* hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: background .3s;
+    }
+    nav.scrolled .nav-toggle span { background: var(--navy); }
+
+    @media (max-width: 680px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px; left: 0; right: 0;
+        flex-direction: column;
+        background: var(--bg);
+        padding: 1rem 6% 1.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,.1);
+        gap: 1.2rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { color: var(--navy); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      height: 100vh;
+      min-height: 520px;
+      background: url('balmar.jpeg') center center / cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(27,63,122,.72) 0%, rgba(27,63,122,.50) 100%);
+    }
+    .hero-content {
+      position: relative;
+      color: #fff;
+      padding: 0 1.5rem;
+      max-width: 680px;
+    }
+    .hero-content h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero-content p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      opacity: .9;
+    }
+    .btn {
+      display: inline-block;
+      padding: .85rem 2.2rem;
+      border-radius: 3px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      letter-spacing: .04em;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      border: 2px solid var(--blue);
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 6%; }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: .5rem;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+    .section-divider {
+      width: 52px;
+      height: 3px;
+      background: var(--blue);
+      margin: .6rem 0 1.2rem;
+    }
+
+    /* ── NOSOTROS ── */
+    #nosotros { background: var(--bg-alt); }
+    .nosotros-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .nosotros-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: .97rem;
+    }
+    .nosotros-img img {
+      width: 100%;
+      border-radius: 4px;
+      object-fit: cover;
+      max-height: 360px;
+      box-shadow: 0 8px 32px rgba(27,63,122,.12);
+    }
+    .valores {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.8rem;
+    }
+    .valor {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: .5rem 1rem;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .valor svg { flex-shrink: 0; }
+
+    @media (max-width: 768px) {
+      .nosotros-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ── PRODUCTOS ── */
+    #productos { background: var(--bg); }
+    .productos-intro {
+      max-width: 620px;
+    }
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
+      background: var(--bg);
+    }
+    .card:hover {
+      box-shadow: 0 8px 28px rgba(27,63,122,.13);
+      transform: translateY(-4px);
+    }
+    .card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+    .card-body {
+      padding: 1.1rem 1.2rem;
+    }
+    .card-body h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: .25rem;
+    }
+    .card-body p {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+    .card-body .scientific {
+      font-size: .78rem;
+      font-style: italic;
+      color: #aab8c8;
+      margin-bottom: .3rem;
+    }
+
+    /* ── POR QUÉ ELEGIRNOS ── */
+    #ventajas { background: var(--navy); color: #fff; }
+    #ventajas .section-title { color: #fff; }
+    #ventajas .section-subtitle { color: rgba(255,255,255,.65); }
+    #ventajas .section-divider { background: var(--blue); }
+    .ventajas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .ventaja {
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .ventaja-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(58,155,213,.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .ventaja h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+    }
+    .ventaja p {
+      font-size: .85rem;
+      color: rgba(255,255,255,.65);
+    }
+
+    /* ── CONTACTO ── */
+    #contacto { background: var(--bg-alt); }
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .contacto-info h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1.4rem;
+    }
+    .contacto-dato {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      margin-bottom: 1.1rem;
+      font-size: .92rem;
+      color: var(--muted);
+    }
+    .contacto-dato svg { flex-shrink: 0; margin-top: 2px; }
+    .contacto-dato a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .contacto-dato a:hover { text-decoration: underline; }
+
+    form { display: flex; flex-direction: column; gap: 1rem; }
+    form input, form textarea {
+      width: 100%;
+      padding: .75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: .92rem;
+      color: var(--text);
+      background: var(--bg);
+      transition: border-color .2s;
+      resize: vertical;
+    }
+    form input:focus, form textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+    form textarea { min-height: 130px; }
+    form button[type="submit"] {
+      align-self: flex-start;
+      padding: .8rem 2rem;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    form button[type="submit"]:hover { background: var(--blue); }
+    .form-success {
+      display: none;
+      padding: 1rem;
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      border-radius: 3px;
+      color: #2e7d32;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 768px) {
+      .contacto-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111d2e;
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 2rem 6%;
+      font-size: .82rem;
+    }
+    footer img { height: 32px; margin-bottom: .75rem; filter: brightness(0) invert(1); opacity: .7; }
+    footer p { margin-top: .3rem; }
+    footer a { color: rgba(255,255,255,.5); text-decoration: none; }
+    footer a:hover { color: var(--blue); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="#inicio" class="nav-logo">
+      <img src="logo.jpeg" alt="Balmar S.A." />
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Conectamos el mar<br>con el mundo</h1>
+      <p>Importación, exportación y comercialización de pescados y mariscos de primera calidad.</p>
+      <a href="#contacto" class="btn btn-primary">Contáctenos</a>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros">
+    <div class="nosotros-grid">
+      <div class="nosotros-text">
+        <h2 class="section-title">Quiénes somos</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">Empresa argentina especializada en el comercio de productos del mar.</p>
+        <p>En Balmar S.A. comercializamos productos del mar argentino de primera calidad, operando con los más altos estándares de trazabilidad y sanidad exigidos por los mercados internacionales.</p>
+        <p>Exportamos a Latinoamérica, Norteamérica, Europa, Asia y África, conectando las riquezas del mar argentino con compradores en todo el mundo mediante una cadena logística confiable y eficiente.</p>
+        <div class="valores">
+          <div class="valor">
+            <svg width="16" height="16" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Calidad certificada
+          </div>
+          <div class="valor">
+            <svg width="16" height="16" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Trazabilidad total
+          </div>
+          <div class="valor">
+            <svg width="16" height="16" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Comercio exterior
+          </div>
+          <div class="valor">
+            <svg width="16" height="16" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Atención personalizada
+          </div>
+        </div>
+      </div>
+      <div class="nosotros-img">
+        <img src="balmar.jpeg" alt="Puerto pesquero de Mar del Plata" />
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS -->
+  <section id="productos">
+    <div class="productos-intro">
+      <h2 class="section-title">Nuestros productos</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Especies del mar argentino, capturadas y procesadas con los más altos estándares para mercados de todo el mundo.</p>
+    </div>
+    <div class="productos-grid">
+      <div class="card">
+        <img src="https://images.pexels.com/photos/19443554/pexels-photo-19443554.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corvina Rubia" />
+        <div class="card-body">
+          <p class="scientific">Micropogonias furnieri</p>
+          <h3>Corvina Rubia</h3>
+          <p>Especie de alto valor gastronómico, muy apreciada en los mercados europeos y asiáticos.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=600&q=80" alt="Merluza" />
+        <div class="card-body">
+          <p class="scientific">Merluccius hubbsi</p>
+          <h3>Merluza (Hake)</h3>
+          <p>Uno de los recursos pesqueros más importantes de Argentina, con alta demanda internacional.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.pexels.com/photos/1683545/pexels-photo-1683545.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Langostino" />
+        <div class="card-body">
+          <p class="scientific">Pleoticus muelleri</p>
+          <h3>Langostino</h3>
+          <p>El crustáceo de exportación más valorado de Argentina, reconocido por su sabor y textura.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.pexels.com/photos/566345/pexels-photo-566345.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Calamar" />
+        <div class="card-body">
+          <p class="scientific">Illex argentinus</p>
+          <h3>Calamar</h3>
+          <p>Captura de temporada con gran demanda en Asia, Europa y América del Norte.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ ELEGIRNOS -->
+  <section id="ventajas">
+    <div style="max-width:1100px; margin:0 auto;">
+      <h2 class="section-title">¿Por qué elegirnos?</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Nos diferenciamos por el compromiso con la calidad y la solidez operativa.</p>
+      <div class="ventajas-grid">
+        <div class="ventaja">
+          <div class="ventaja-icon">
+            <svg width="26" height="26" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4>Calidad garantizada</h4>
+          <p>Todos nuestros productos cumplen las normativas sanitarias nacionales e internacionales.</p>
+        </div>
+        <div class="ventaja">
+          <div class="ventaja-icon">
+            <svg width="26" height="26" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h4>Cumplimiento en tiempo</h4>
+          <p>Cadena logística optimizada para garantizar entregas en los plazos acordados.</p>
+        </div>
+        <div class="ventaja">
+          <div class="ventaja-icon">
+            <svg width="26" height="26" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 12 2"/><path d="M2 12h4M18 12h4"/></svg>
+          </div>
+          <h4>Alcance internacional</h4>
+          <p>Experiencia en operaciones de comercio exterior con destinos en múltiples mercados.</p>
+        </div>
+        <div class="ventaja">
+          <div class="ventaja-icon">
+            <svg width="26" height="26" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4>Trato personalizado</h4>
+          <p>Asesoramiento directo y soluciones adaptadas a las necesidades de cada cliente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div style="max-width:1000px; margin:0 auto;">
+      <h2 class="section-title">Contacto</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">¿Tiene una consulta o desea hacer un pedido? Escríbanos y le respondemos a la brevedad.</p>
+      <div class="contacto-grid">
+        <div class="contacto-info">
+          <h3>Balmar S.A.</h3>
+          <div class="contacto-dato">
+            <svg width="18" height="18" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span><strong>Baltasar Moisano</strong><br>Gerente Comercial</span>
+          </div>
+          <div class="contacto-dato">
+            <svg width="18" height="18" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Mar del Plata, Buenos Aires, Argentina</span>
+          </div>
+          <div class="contacto-dato">
+            <svg width="18" height="18" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:comercial@balmar.com.ar">comercial@balmar.com.ar</a>
+          </div>
+          <div class="contacto-dato">
+            <svg width="18" height="18" fill="none" stroke="#3A9BD5" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.58 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+            <a href="tel:+5492236044434">+54 9 223 604-4434</a>
+          </div>
+          <div class="contacto-dato">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#3A9BD5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            <a href="https://wa.me/5492236044434" target="_blank">+54 9 223 604-4434</a>
+          </div>
+        </div>
+        <div>
+          <div class="form-success" id="formSuccess">
+            ¡Mensaje enviado! Le responderemos a la brevedad.
+          </div>
+          <!-- Reemplazar XXXXXXXX con el ID de Formspree -->
+          <form action="https://formspree.io/f/XXXXXXXX" method="POST" id="contactForm">
+            <input type="text" name="nombre" placeholder="Nombre y apellido" required />
+            <input type="email" name="email" placeholder="Correo electrónico" required />
+            <input type="text" name="empresa" placeholder="Empresa (opcional)" />
+            <textarea name="mensaje" placeholder="Su consulta..." required></textarea>
+            <button type="submit">Enviar mensaje</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="logo.jpeg" alt="Balmar S.A." />
+    <p>© 2026 Balmar S.A. — Todos los derechos reservados.</p>
+    <p style="margin-top:.4rem;">
+      <a href="#nosotros">Nosotros</a> &nbsp;·&nbsp;
+      <a href="#productos">Productos</a> &nbsp;·&nbsp;
+      <a href="#contacto">Contacto</a>
+    </p>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Mobile menu toggle
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => navLinks.classList.remove('open'))
+    );
+
+    // Formspree AJAX submit
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const res = await fetch(form.action, {
+        method: 'POST', body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.reset();
+        form.style.display = 'none';
+        success.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
