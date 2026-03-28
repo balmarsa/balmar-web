@@ -46,10 +46,15 @@
     .nav-logo img {
       height: 44px;
       display: block;
-      filter: brightness(0) invert(1);
-      transition: filter .3s;
+      background: rgba(255,255,255,.92);
+      padding: 4px 10px;
+      border-radius: 3px;
+      transition: background .3s, padding .3s, border-radius .3s;
     }
-    nav.scrolled .nav-logo img { filter: none; }
+    nav.scrolled .nav-logo img {
+      background: transparent;
+      padding: 0;
+    }
 
     .nav-right {
       display: flex;
@@ -462,6 +467,7 @@
   <section id="nosotros">
     <div class="nosotros-grid">
       <div class="nosotros-text">
+        <img src="logo.jpeg" alt="Balmar S.A." style="height:90px; margin-bottom:1.5rem; display:block;" />
         <h2 class="section-title" data-i18n="nosotros.title">Quiénes somos</h2>
         <div class="section-divider"></div>
         <p class="section-subtitle" data-i18n="nosotros.subtitle">Empresa argentina especializada en el comercio de productos del mar.</p>
