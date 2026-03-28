@@ -236,12 +236,24 @@
       margin-bottom: 1rem;
       font-size: .97rem;
     }
-    .nosotros-img img {
+    .nosotros-img {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .nosotros-logo {
+      width: 82%;
+      display: block;
+      margin: 0 auto;
+      mix-blend-mode: multiply;
+    }
+    .nosotros-photo {
       width: 100%;
       border-radius: 4px;
       object-fit: cover;
-      max-height: 360px;
+      height: 220px;
       box-shadow: 0 8px 32px rgba(27,63,122,.12);
+      display: block;
     }
     .valores {
       display: flex;
@@ -467,7 +479,6 @@
   <section id="nosotros">
     <div class="nosotros-grid">
       <div class="nosotros-text">
-        <img src="logo.jpeg" alt="Balmar S.A." style="height:90px; margin-bottom:1.5rem; display:block;" />
         <h2 class="section-title" data-i18n="nosotros.title">Quiénes somos</h2>
         <div class="section-divider"></div>
         <p class="section-subtitle" data-i18n="nosotros.subtitle">Empresa argentina especializada en el comercio de productos del mar.</p>
@@ -493,7 +504,8 @@
         </div>
       </div>
       <div class="nosotros-img">
-        <img src="balmar.jpeg" alt="Puerto pesquero de Mar del Plata" />
+        <img src="logo.jpeg" alt="Balmar S.A." class="nosotros-logo" />
+        <img src="balmar.jpeg" alt="Puerto pesquero de Mar del Plata" class="nosotros-photo" />
       </div>
     </div>
   </section>
