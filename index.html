@@ -43,17 +43,25 @@
       background: var(--bg);
       box-shadow: 0 2px 12px rgba(0,0,0,.08);
     }
-    .nav-logo img {
+    .nav-logo {
+      overflow: hidden;
       height: 44px;
-      display: block;
-      background: rgba(255,255,255,.92);
-      padding: 4px 10px;
-      border-radius: 3px;
-      transition: background .3s, padding .3s, border-radius .3s;
+      width: 144px;
+      border-radius: 4px;
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 1px 8px rgba(0,0,0,.18);
+      transition: background .3s, box-shadow .3s;
+      flex-shrink: 0;
     }
-    nav.scrolled .nav-logo img {
-      background: transparent;
-      padding: 0;
+    nav.scrolled .nav-logo {
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 1px 6px rgba(0,0,0,.10);
+    }
+    .nav-logo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-top: -50px;
     }
 
     .nav-right {
@@ -225,9 +233,9 @@
     #nosotros { background: var(--bg-alt); }
     .nosotros-grid {
       display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 3rem;
-      align-items: start;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -236,10 +244,12 @@
       margin-bottom: 1rem;
       font-size: .97rem;
     }
-    .nosotros-logo {
+    .nosotros-img img {
       width: 100%;
-      display: block;
-      mix-blend-mode: multiply;
+      border-radius: 4px;
+      object-fit: cover;
+      max-height: 360px;
+      box-shadow: 0 8px 32px rgba(27,63,122,.12);
     }
     .valores {
       display: flex;
@@ -424,7 +434,22 @@
       padding: 2rem 6%;
       font-size: .82rem;
     }
-    footer img { height: 32px; margin-bottom: .75rem; filter: brightness(0) invert(1); opacity: .7; }
+    .footer-logo {
+      overflow: hidden;
+      height: 48px;
+      width: 48px;
+      border-radius: 4px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 1px 6px rgba(0,0,0,.2);
+      margin: 0 auto .75rem;
+    }
+    .footer-logo img {
+      width: 80px;
+      height: auto;
+      display: block;
+      margin-top: -14px;
+      margin-left: -16px;
+    }
     footer p { margin-top: .3rem; }
     footer a { color: rgba(255,255,255,.5); text-decoration: none; }
     footer a:hover { color: var(--blue); }
@@ -464,9 +489,6 @@
   <!-- NOSOTROS -->
   <section id="nosotros">
     <div class="nosotros-grid">
-      <div class="nosotros-img">
-        <img src="logo.jpeg" alt="Balmar S.A." class="nosotros-logo" />
-      </div>
       <div class="nosotros-text">
         <h2 class="section-title" data-i18n="nosotros.title">Quiénes somos</h2>
         <div class="section-divider"></div>
@@ -491,6 +513,9 @@
             <span data-i18n="nosotros.v4">Atención personalizada</span>
           </div>
         </div>
+      </div>
+      <div class="nosotros-img">
+        <img src="balmar.jpeg" alt="Puerto pesquero de Mar del Plata" />
       </div>
     </div>
   </section>
@@ -625,7 +650,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <img src="logo.jpeg" alt="Balmar S.A." />
+    <div class="footer-logo"><img src="logo.jpeg" alt="Balmar S.A." /></div>
     <p>© 2026 Balmar S.A. — <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
     <p style="margin-top:.4rem;">
       <a href="#nosotros" data-i18n="nav.nosotros">Nosotros</a> &nbsp;·&nbsp;
